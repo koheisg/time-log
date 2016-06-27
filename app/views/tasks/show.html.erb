@@ -1,13 +1,18 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Time:</strong>
-  <%= @task.time %>
+  <strong>Title:</strong>
+  <%= @task.title %>
 </p>
 
 <p>
-  <strong>Title:</strong>
-  <%= @task.title %>
+  <strong>Duration:</strong>
+  <%= @task.duration %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @task.date %>
 </p>
 
 <%= link_to 'Edit', edit_task_path(@task) %> |
