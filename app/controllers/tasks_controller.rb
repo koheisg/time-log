@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :set_task, only: [:update, :destroy]
 
   # GET /tasks
   # GET /tasks.json
@@ -10,8 +10,11 @@ class TasksController < ApplicationController
   # GET /tasks/1
   # GET /tasks/1.json
   def show
+    DateTime.parse(params[:id]) #strong parameters
+    @tasks = Task.all
+    @date = params[:id]
   end
-  
+
   # POST /tasks
   # POST /tasks.json
   def create
@@ -19,7 +22,7 @@ class TasksController < ApplicationController
 
     respond_to do |format|
       if @task.save
-        format.html { redirect_to @task, notice: 'Task was successfully created.' }
+        format.html { redirect_to task_path(@task.date.strftime('%Y%m%d')), notice: 'Task was successfully created.' }
         format.json { render :show, status: :created, location: @task }
       else
         format.html { render :new }

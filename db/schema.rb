@@ -11,35 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160625064852) do
-
-  create_table "calendars", force: :cascade do |t|
-    t.integer  "day_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "calendars", ["day_id"], name: "index_calendars_on_day_id"
-
-  create_table "days", force: :cascade do |t|
-    t.integer  "log_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "days", ["log_id"], name: "index_days_on_log_id"
-
-  create_table "logs", force: :cascade do |t|
-    t.integer  "task_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "logs", ["task_id"], name: "index_logs_on_task_id"
+ActiveRecord::Schema.define(version: 20160627130838) do
 
   create_table "tasks", force: :cascade do |t|
-    t.integer  "time"
     t.string   "title"
+    t.integer  "duration"
+    t.date     "date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

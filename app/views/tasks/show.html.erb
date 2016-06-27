@@ -1,19 +1,50 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Title:</strong>
-  <%= @task.title %>
-</p>
-
-<p>
-  <strong>Duration:</strong>
-  <%= @task.duration %>
-</p>
-
-<p>
   <strong>Date:</strong>
-  <%= @task.date %>
-</p>
+  <%= @date %>
 
-<%= link_to 'Edit', edit_task_path(@task) %> |
-<%= link_to 'Back', tasks_path %>
+  <table>
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Duration</th>
+        <th>Date</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @tasks.each do |task| %>
+        <tr>
+          <td><%= task.title %></td>
+          <td><%= task.duration %></td>
+          <td><%= task.date %></td>
+          <td><%= link_to 'Show', task %></td>
+          <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+
+  <%= form_for(Task.new(date: @tasks)) do |f| %>
+
+    <div class="field">
+      <%= f.label :title %><br>
+      <%= f.text_field :title %>
+    </div>
+    <div class="field">
+      <%= f.label :duration %><br>
+      <%= f.number_field :duration %>
+    </div>
+    <div class="field">
+      <%= f.label :date %><br>
+      <%= f.hidden_field(:date) %>
+    </div>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+  <% end %>
+
+</p>
