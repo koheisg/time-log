@@ -11,8 +11,9 @@ class TasksController < ApplicationController
   # GET /tasks/1.json
   def show
     DateTime.parse(params[:id]) #strong parameters
-    @tasks = Task.all
+    today = DateTime.parse(params[:id]) #strong parameters
     @date = params[:id]
+    @tasks = Task.where("date = :date", date: today.strftime('%Y-%m-%d'))
   end
 
   # POST /tasks
