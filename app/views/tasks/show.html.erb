@@ -7,22 +7,29 @@
   <table>
     <thead>
       <tr>
-        <th>Title</th>
-        <th>Duration</th>
-        <th>Date</th>
+        <th>タスク名</th>
+        <th>所要時間</th>
+        <th>削除</th>
         <th colspan="3"></th>
       </tr>
     </thead>
 
     <tbody>
+      <% @total = Array.new %>
       <% @tasks.each do |task| %>
         <tr>
           <td><%= task.title %></td>
           <td><%= task.duration %></td>
           <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         </tr>
+        <% @total.push(task.duration) %>
       <% end %>
     </tbody>
+    <tfoot>
+      <tr>
+        <td><%= @total.inject(:+) %></td>
+      </tr>
+    </tfoot>
   </table>
 
 
@@ -34,7 +41,7 @@
     </div>
     <div class="field">
       <%= f.label :duration %><br>
-      <%= f.number_field :duration %>
+      <%= f.number_field :duration, :step => 15 %>
     </div>
     <div class="field">
       <%= f.label :date %><br>
