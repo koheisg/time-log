@@ -4,7 +4,14 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = Task.all
+    # date = DateTime.parse(params[:id])
+    this_month = Time.now.month
+    last_month = Time.now.month - 1
+    days = Date.new(Time.now.year, this_month, -1).day.to_i
+    range = 1..days
+    @tasks = range.each do |date|
+      Task.create_with_date(date)
+    end
   end
 
   # GET /tasks/1
