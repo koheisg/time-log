@@ -1,10 +1,7 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:update, :destroy]
 
-  # GET /tasks
-  # GET /tasks.json
   def index
-    # date = DateTime.parse(params[:id])
     this_month = Time.now.month
     last_month = Time.now.month - 1
     days = Date.new(Time.now.year, this_month, -1).day.to_i
@@ -14,16 +11,13 @@ class TasksController < ApplicationController
     end
   end
 
-  # GET /tasks/1
-  # GET /tasks/1.json
   def show
+    @this_day = Date.today.strftime('%Y%m%d')
     selected_day = DateTime.parse(params[:id]) #strong parameters
-    @date = params[:id]
+    @date = params[:date]
     @tasks = Task.where("date = :date", date: selected_day.strftime('%Y-%m-%d'))
   end
 
-  # POST /tasks
-  # POST /tasks.json
   def create
     @task = Task.new(task_params)
 
@@ -38,8 +32,6 @@ class TasksController < ApplicationController
     end
   end
 
-  # PATCH/PUT /tasks/1
-  # PATCH/PUT /tasks/1.json
   def update
     respond_to do |format|
       if @task.update(task_params)
@@ -52,8 +44,6 @@ class TasksController < ApplicationController
     end
   end
 
-  # DELETE /tasks/1
-  # DELETE /tasks/1.json
   def destroy
     @task.destroy
     respond_to do |format|
