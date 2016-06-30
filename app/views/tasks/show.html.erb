@@ -45,7 +45,7 @@
     </div>
     <div class="field">
       <%= f.label :date %><br>
-      <%= f.hidden_field :date, :value => @date %>
+      <%= f.hidden_field :date, :value => DateTime.parse(params[:id]) %>
     </div>
     <div class="actions">
       <%= f.submit %>
